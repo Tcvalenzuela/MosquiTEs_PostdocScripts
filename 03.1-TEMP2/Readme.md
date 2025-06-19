@@ -33,7 +33,7 @@ To latter Run Baypass;
 
 Nonetheless to run Baypass we first need to convert the format from bed to a Baypass readable file
 
-as on file:
+As on file:
 ```
 Merge2BaypassAlleleTEMP2v6.py
 ```
@@ -42,4 +42,9 @@ the other 5 itiration of this are availables at:
 
 ```
 /beegfs/project/mosquites/aalbo1200g/TEMP2Loops/All
+```
+To then run Baypass as :
+
+```
+RunningBaypass.bash
 ```
