@@ -15,7 +15,7 @@ for file in "$Folder"/*_NoDup_1_val_1.fq.gz.insertion.bed; do
     
     # Filter lines starting with NC or NW and append the sample name to each valid line
     awk -v sname="$sname" '
-        $1 ~ /^(NC|NW)/ { print $0 "\t" sname }
+        $1 ~ /^(NC|NW)/ { print $0 "\t" sname "\t""TEMP2" }
     ' "$file" > "${OutputFolder}/${sname}_snamed.bed"
 done
 
