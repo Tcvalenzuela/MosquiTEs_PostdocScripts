@@ -32,7 +32,14 @@ sort -k1,1 -k2,2n "${OutputFolder}/All_cat.bed" -o "${OutputFolder}/All_cat.bed"
 
 # Step 3: Split by element
 cut -f 4 "${OutputFolder}/All_cat.bed" | cut -d ':' -f 1 | sort | uniq | while read -r ele; do
-    awk -v ele="$ele" -F'\t' '$4 ~ "^"ele":" { print }' "${OutputFolder}/All_cat.bed" > "${OutputFolder}/All_${ele}_cat.bed"
+    awk -v ele="$ele" -F'\t' '
+        $4 ~ "^"ele":" {
+            split($4, a, ":");
+            $4 = a[1];
+            print $0;
+        }
+    ' OFS='\t' "${OutputFolder}/All_cat.bed" > "${OutputFolder}/All_${ele}_cat.bed"
+
     mergeBed -i "${OutputFolder}/All_${ele}_cat.bed" -c 4,16,17 -o collapse,collapse,collapse > "${OutputFolder}/All_${ele}_Merged.bed"
     rm "${OutputFolder}/All_${ele}_cat.bed"
 done
